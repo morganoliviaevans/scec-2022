@@ -33,7 +33,7 @@ The `/high-resolution-simulations/` directory contains high-resolution simulatio
 The `/low-resolution-scripts/` and `/high-resolution-scripts/` directories include all scripts used during the research phases, organized by project. Each script is documented with comments explaining its purpose and usage.
 
 # Software Used
-**SW4:** [SW4 Software](https://geodynamics.org/cig/software/sw4/)
+- **SW4:** [SW4 Software](https://geodynamics.org/cig/software/sw4/)
 
 # Reports and Documentation
 The `/low-resolution-docs/` and `/high-resolution-docs/` directories contain detailed build instructions, references, and additional documentation related to the research.
