@@ -13,14 +13,12 @@ This repository includes the simulations, poster, paper, scripts, and documentat
 
 2. **High-Resolution Simulations**
   
-3. **Posters and Paper**
-   - Poster presentation for 2022 SCEC Annual Meeting
-   - "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster"
-
-5. **Scripts**
+3. **Scripts**
    - Scripts used during both summer and fall, with detailed comments and usage instructions
 
-6. **Documentation**
+4. **Documentation**
+   - Poster presentation for 2022 SCEC Annual Meeting
+   - "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster"
    - Build instructions, references, and additional documentation for both summer and fall
 
 # Low-Resolution Simulations
@@ -35,7 +33,7 @@ The `/low-resolution-scripts/` and `/high-resolution-scripts/` directories inclu
 # Software Used
 - **SW4:** [SW4 Software](https://geodynamics.org/cig/software/sw4/)
 
-# Reports and Documentation
+# Documentation
 The `/low-resolution-docs/` and `/high-resolution-docs/` directories contain detailed build instructions, references, and additional documentation related to the research.
 
 This repository serves as a comprehensive record of my research experience with SCEC, providing insights into the seismic modeling tasks I completed and the knowledge gained. I hope it can be a valuable resource for anyone interested in similar work or future interns. Feel free to explore the repository, and don't hesitate to reach out if you have any questions! [morganoliviaevans@gmail.com](mailto:morganoliviaevans@gmail.com)
