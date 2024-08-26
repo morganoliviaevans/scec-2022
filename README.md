@@ -11,18 +11,17 @@ This repository includes the simulations, poster, paper, scripts, and documentat
 
 # Table of Contents
 1. **Low-Resolution Simulations**
-   - Low-Resolution Simulations
-   - Poster presentation for 2022 SCEC Annual Meeting
 
 2. **High-Resolution Simulations**
-   - High-Resolution Simulations
-   - Scaling analysis and performance results
+  
+3. **Posters and Paper**
+   - Poster presentation for 2022 SCEC Annual Meeting
    - "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster"
 
-3. **Scripts**
+5. **Scripts**
    - Scripts used during both summer and fall, with detailed comments and usage instructions
 
-4. **Documentation**
+6. **Documentation**
    - Build instructions, references, and additional documentation for both summer and fall
 
 # Low-Resolution Simulations
