@@ -11,23 +11,19 @@ This repository includes the simulations, poster, paper, scripts, and documentat
 
 # Table of Contents
 1. **Low-Resolution Simulations**
-   - [Low-Resolution Simulations](low-resolution-simulations/)
+   - Low-Resolution Simulations
    - Poster presentation for 2022 SCEC Annual Meeting
 
 2. **High-Resolution Simulations**
-   - [High-Resolution Simulations](high-resolution-simulations/)
+   - High-Resolution Simulations
    - Scaling analysis and performance results
    - "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster"
 
 3. **Scripts**
-   - [Low-Resolution Scripts](low-resolution-scripts/)
-   - [High-Resolution Scripts](high-resolution-scripts/)
-   - Scripts used during the summer and fall phases, with detailed comments and usage instructions
+   - Scripts used during both summer and fall, with detailed comments and usage instructions
 
 4. **Documentation**
-   - [Low-Resolution Documentation](low-resolution-docs/)
-   - [High-Resolution Documentation](high-resolution-docs/)
-   - Build instructions, references, and additional documentation for both summer and fall research phases
+   - Build instructions, references, and additional documentation for both summer and fall
 
 # Low-Resolution Simulations
 The `/low-resolution-simulations/` directory contains simulation data and results from the summer research phase, focusing on low-resolution seismic modeling using a MacBook Pro. The poster presented at the 2022 SCEC Annual Meeting is also included here.
