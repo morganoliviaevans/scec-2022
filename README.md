@@ -1,4 +1,4 @@
-# Southern California Earthquake Center Research Internship, Summer & Fall 2022
+# Southern California Earthquake Center Internship, Summer & Fall 2022
 
 # Overview
 This repository documents my research and accomplishments during my internship with the Southern California Earthquake Center (SCEC) in the Summer and Fall of 2022. The research was conducted in two phases:
