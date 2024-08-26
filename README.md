@@ -26,7 +26,7 @@ This repository includes the simulations, poster, paper, scripts, and documentat
 # Low-Resolution Simulations
 The `/low-resolution-simulations/` directory contains simulation data and results from the summer research phase, focusing on low-resolution seismic modeling using a MacBook Pro. The poster presented at the 2022 SCEC Annual Meeting is also included here.
 
-# Objective 2: Fall Research - High-Resolution Simulations
+# High-Resolution Simulations
 The `/high-resolution-simulations/` directory contains high-resolution simulations performed during the fall research phase using the ARCH Rockfish cluster. This includes scaling analysis, performance results, and the final paper summarizing the findings.
 
 # Scripts
