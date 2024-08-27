@@ -31,6 +31,8 @@ The `/docs/` directory contains resources and additional documentation related t
 The `/reports-posters/` directory contains my 2022 Southern California Earthquake Center (SCEC) Annual Meeting poster, 2023 Earthquake Engineering Research Institute (EERI) poster, a comprehensive updated guide for SW4 software installation, and "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster" technical paper.
 
 # Simulations
-The `/simulations/` directory contains example data and results for 0.6Hz (low-resolution) and 1.5Hz (high-resolution) simluations. Many simulations were created and analyzed for this research with varying epicenter locations, minimum velocity, frequency, earthquake magnitude and basin depth models. 
+The `/simulations/` directory contains example data and results for 0.6Hz (low-resolution) and 1.5Hz (high-resolution) simluations. Many simulations were created and analyzed for this research with varying epicenter locations, minimum velocity, frequency, earthquake magnitude and basin depth models.
+
+**Update:** 1.5Hz simulations are apparently too large for GitHub. Instead, please view [here](https://www.youtube.com/watch?v=5OeCtDuIKwE) on YouTube.
 
 This repository serves as a comprehensive record of my research experience with SCEC, providing insights into the seismic modeling tasks I completed and the knowledge gained. I hope it can be a valuable resource for anyone interested in similar work or future interns. Feel free to explore the repository, and don't hesitate to reach out if you have any questions! [morganoliviaevans@gmail.com](mailto:morganoliviaevans@gmail.com)
