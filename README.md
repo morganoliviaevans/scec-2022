@@ -4,7 +4,7 @@
 This repository documents my research and accomplishments during my internship with the Southern California Earthquake Center (SCEC) in the Summer and Fall of 2022. The research was conducted in two phases:
 
 - **Summer 2022:** Focused on low-resolution seismic simulations using SW4 software on a MacBook Pro.
-- **Fall 2022:** Focused on high-resolution seismic simulations using the ARCH Rockfish supercomputing cluster. This phase included a detailed analysis and scaling study, culminating in a technical paper.
+- **Fall 2022 - Winter 2023:** Focused on high-resolution seismic simulations using the ARCH Rockfish supercomputing cluster. This phase included a detailed analysis and scaling study, culminating in a technical paper.
 
 This repository includes the simulations, poster, paper, scripts, and documentation related to the research.
 
