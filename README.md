@@ -22,8 +22,7 @@ The `/low-resolution-simulations/` directory contains simulation data and result
 The `/high-resolution-simulations/` directory contains high-resolution simulations performed during the fall research phase using the ARCH Rockfish cluster. This includes scaling analysis, performance results, and the final paper summarizing the findings.
 
 # Scripts
-The and `/scripts/` directory includes all scripts used during the research phases, organized by project. Each script is documented with comments explaining its purpose and usage.
-
+The `/scripts/` directory contains scripts I developed or utilized during my internship. Each script is documented with comments to explain its purpose and usage. All scripts used for were jointly built with my advisor, [John Louie, PhD, Chief Geophysicist | Terēan™](https://www.louie.pub/) and manually adjusted per architecture and system specification.
 # Software Used
 - **SW4:** [SW4 Software](https://geodynamics.org/cig/software/sw4/)
 
