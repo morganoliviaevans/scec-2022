@@ -25,11 +25,11 @@ The `/high-resolution-simulations/` directory contains high-resolution simulatio
 The `/scripts/` directory contains scripts I developed or utilized during my internship. Each script is documented with comments to explain its purpose and usage. All scripts used for were jointly built with my advisor, [John Louie, PhD, Chief Geophysicist | Terēan™](https://www.louie.pub/) and manually adjusted per architecture and system specification.
 
 # Software Used
-- **[SW4 2.01]**(https://geodynamics.org/cig/software/sw4/)
-- **[Seismic Analysis Code (SAC)]**(https://ds.iris.edu/files/sac-manual/)
-- **[Adapter]**(https://macroplant.com/adapter)
-- **[Google Earth]**(https://earth.google.com/intl/earth/versions/)
-- **[JRGViewmat]**(https://zenodo.org/records/6635764)
+- [SW4 2.01](https://geodynamics.org/cig/software/sw4/)
+- [Seismic Analysis Code (SAC)](https://ds.iris.edu/files/sac-manual/)
+- [Adapter](https://macroplant.com/adapter)
+- [Google Earth](https://earth.google.com/intl/earth/versions/)
+- [JRGViewmat](https://zenodo.org/records/6635764)
 
 # Reports and Posters
 The `/reports-posters/` directory contains my 2022 Southern California Earthquake Center (SCEC) Annual Meeting poster, 2023 Earthquake Engineering Research Institute (EERI) poster, a comprehensive updated guide for SW4 software installation, and "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster" technical paper.
