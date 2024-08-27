@@ -12,11 +12,10 @@ This repository includes the simulations, poster, paper, scripts, and documentat
 - [Scripts](#scripts)
 - [Documentation](#documentation)
 - [Reports and Posters](#reports-and-posters)
-- [Low-Resolution Simulations](#low-resolution-simulations)
-- [High-Resolution Simulations](#high-resolution-simulations)
+- [Simulations](#simulations)
 
 # Scripts
-The `/scripts/` directory contains scripts I developed or utilized during my internship. Each script is documented with comments to explain its purpose and usage. All scripts used for were jointly built with my advisor, [John Louie, PhD, Chief Geophysicist | Terēan™](https://www.louie.pub/) and manually adjusted per architecture and system specification.
+The `/scripts/` directory contains a sample of scripts I developed or utilized during my internship. Each script is documented with comments to explain its purpose and usage. All scripts used for were jointly built with my advisor, [John Louie, PhD, Chief Geophysicist | Terēan™](https://www.louie.pub/). Many different scripts were created which varied significantly per architecture and system specification.
 
 # Software Used
 - [Adapter](https://macroplant.com/adapter)
@@ -31,10 +30,7 @@ The `/docs/` directory contains detailed build instructions, references, and add
 # Reports and Posters
 The `/reports-posters/` directory contains my 2022 Southern California Earthquake Center (SCEC) Annual Meeting poster, 2023 Earthquake Engineering Research Institute (EERI) poster, a comprehensive updated guide for SW4 software installation, and "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster" technical paper.
 
-# Low-Resolution Simulations
-The `/low-resolution-simulations/` directory contains simulation data and results from the summer research phase, focusing on low-resolution seismic modeling using a MacBook Pro. The poster presented at the 2022 SCEC Annual Meeting is also included here.
-
-# High-Resolution Simulations
-The `/high-resolution-simulations/` directory contains high-resolution simulations performed during the fall research phase using the ARCH Rockfish cluster. This includes scaling analysis, performance results, and the final paper summarizing the findings.
+# Simulations
+The `/simulations/` directory contains data and results for 0.3Hz and 0.75Hz simluations.
 
 This repository serves as a comprehensive record of my research experience with SCEC, providing insights into the seismic modeling tasks I completed and the knowledge gained. I hope it can be a valuable resource for anyone interested in similar work or future interns. Feel free to explore the repository, and don't hesitate to reach out if you have any questions! [morganoliviaevans@gmail.com](mailto:morganoliviaevans@gmail.com)
