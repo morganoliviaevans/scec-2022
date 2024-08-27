@@ -1,0 +1,214 @@
+# MA-CME Input File for ModelAssembler and SW4
+# ModelAssembler 6.0.0 for SW4 by John Louie and William Savran 09/01/15
+# https://sites.google.com/view/nevada-shake-zoning
+
+# Run Platform Paths:
+platform arch=intel shpath=/bin/bash javacpath=$JAVAC javapath=$JAVA_HOME/bin/java ccpath=$CC e3dpath=/usr/local/bin/e3d
+
+# Grid Definition:
+# SW Corner lat0=-41.359721 lon0=174.714919
+# NW Corner lat0=-41.206476 lon0=174.714919
+#e3dgrid l=341 m=601 n=421 dh=0.05 b=4 active=0 q=1 az=90.0 lat0=-41.359721 lon0=174.714919
+#grid nx=421 ny=341 nz=601 h=50.0 lat=-41.206829 lon=174.714919 az=90.0
+#pgrid nx=516 ny=318 nz=601 h=50.0 delta=5.0E-4 lat=-41.360 lon=174.714 az=90.0
+grid y=18000 z=15000 x=22000 h=100 az=90.0 lat=-41.206829 lon=174.714919
+
+# Source Definitions:
+# Source from location of Monday, April 03 2006 at 8:42 am but shallower, RL SS along WF
+# source     type=6 strike=90 dip=90 rake=180 freq=0.5 t0=0 amp=1.e20 m=500 lat=-41.30 lon=174.76 l=133 n=75
+source     type=C6SmoothBump strike=44 dip=80 rake=-180 freq=0.30 t0=0 m0=1.153e14 lat=-41.27553 lon=174.84121 depth=10000
+
+# Rules line for Louie alterations to Benites & Olsen (2005)
+rules file=WnLH-Rules.java Qf=1 minthick=0.01 minVs=0.175 minVp=1.45 maxv=5.4 vpovs=1.732051 zgeotech=0.03 rockgeotech=0.525 soilgeotech=0.225
+vfile type=p file=vp.flt
+vfile type=s file=vs.flt
+vfile type=r file=den.flt
+vfile Qf=1.0 file=Qp.Qp
+vfile Qf=1.0 file=Qs.Qs
+
+# Basin Data Inputs:
+# Basin depth from depth to Vs=1500 m/s in Benites & Olsen (2005 BSSA)
+basin type=proximity file=wellington-region-basins.asc interp=near radius=0.2 search=30.0
+#basin type=depth format=ascii radius=0.1 search=0.2 interp=dist file=wnlh-benites-dep.asc
+basin type=depth format=ascii radius=0.2 search=0.5 interp=near file=D2B_PREF.txt
+basin type=depth format=ascii radius=0.25 search=1 interp=quad file=Parkway-remi-depth.asc
+#basin type=depth format=ascii radius=0.3 search=0.6 interp=dist file=Stronach-GNS-adjust.asc
+#basin type=depth format=ascii radius=0.02 search=0.05 interp=near file=Wellington-Stronach-depth.asc
+
+# Geotechnical Data Inputs:
+# Vs30 computed from multilayer model of Benites & Olsen (2005 BSSA)
+#geotech	depth=30 file=wnlh-benites-v30.asc format=ascii radius=0.2
+# Vs30 taken from 2006 measurements of Kaiser and Louie
+geotech	depth=30 file=wnlh-remi.asc format=ascii interp=dist radius=0.25
+
+# Attenuation specification for SW4:
+attenuation phasefreq=0.30
+
+block vp=5500 vs=3175 rho=2670 qp=2000 qs=2000
+# MA 6.0.0 Writes New ASCII Profile Grid File For SW4
+#pfile filename=Wellington-Central-pfile.asc smoothingsize=3
+pfile filename=Wellington-Central-GNS-only-pfile.asc smoothingsize=3
+# global minima for velocities
+globalmaterial vpmin=1450 vsmin=350
+
+# Run Time-Step Definition:
+#time dt=0.016 t=6251
+time t=40 utcstart=12/23/2015:6:22:36.0
+
+# Run Output Definitions:
+amplif	file=Wellington-Central-GNS-only-amplifmap.flt format=binary
+amplif	file=Wellington-Central-GNS-only-v30map.flt type=vels format=binary
+amplif	file=Wellington-Central-GNS-only-depthmap.flt type=depth format=binary
+#image mode=4 file=PGV-max.intel ieee=1 movie=2 z=0
+#image mode=2 file=snap-snap.intel ieee=1 movie=30 z=0
+
+# After a half second of model time, save the Vs model build
+image mode=s file=vsmap z=0 time=0.5
+image mode=s file=vssect y=8068 time=0.5
+
+# At end of calculation put out maximum horizontal shaking velocity (since source time function is two-sided)
+image mode=hmax file=pgvmap10s z=0 time=10
+image mode=hmax file=pgvmap z=0 time=40
+
+# Extract time slices, maps and sections
+image mode=ux file=snap-ux z=0 timeInterval=0.5
+image mode=uy file=snap-uy z=0 timeInterval=0.5
+image mode=uz file=snap-uz z=0 timeInterval=0.5
+image mode=ux file=sectionsnap-ux y=8068 timeInterval=0.5
+image mode=uy file=sectionsnap-uy y=8068 timeInterval=0.5
+image mode=uz file=sectionsnap-uz y=8068 timeInterval=0.5
+
+# Stations for synthetic seismogram output as SAC files
+
+#sac z=0 file=L01 lat=-41.1793 lon=174.9671
+#sac z=0 file=L02 lat=-41.193 lon=174.9423
+#sac z=0 file=L03 lat=-41.1925 lon=174.9252
+#sac z=0 file=L04 lat=-41.204 lon=174.9162
+#sac z=0 file=L05 lat=-41.2123 lon=174.9042 l=328 n=316
+#sac z=0 file=L06 lat=-41.2173 lon=174.8953 l=317 n=301
+#sac z=0 file=L07 lat=-41.212 lon=174.8643 l=329 n=249
+#sac z=0 file=L08 lat=-41.219 lon=174.8673 l=313 n=254
+#sac z=0 file=L09 lat=-41.2277 lon=174.871 l=294 n=261
+#sac z=0 file=L10 lat=-41.226 lon=174.8788 l=297 n=274
+#sac z=0 file=L11 lat=-41.2303 lon=174.8918 l=288 n=295
+#sac z=0 file=L12 lat=-41.2322 lon=174.9087 l=284 n=323
+#sac z=0 file=L13 lat=-41.236 lon=174.9175 l=275 n=338
+#sac z=0 file=L14 lat=-41.235 lon=174.9205 l=277 n=343
+#sac z=0 file=L15 lat=-41.2458 lon=174.9075 l=253 n=321
+#sac z=0 file=L16 lat=-41.2482 lon=174.9368 l=248 n=370
+#sac z=0 file=L17 lat=-41.2563 lon=174.948 l=230 n=389
+#sac z=0 file=L18 lat=-41.203 lon=174.9537
+#sac z=0 file=L19 lat=-41.2095 lon=174.9402 l=334 n=376
+#sac z=0 file=L20 lat=-41.2055 lon=174.9303
+#sac z=0 file=L21 lat=-41.2098 lon=174.9243 l=333 n=349
+#sac z=0 file=L22 lat=-41.2203 lon=174.9217 l=310 n=345
+#sac z=0 file=L23 lat=-41.2207 lon=174.9097 l=309 n=325
+#sac z=0 file=L24 lat=-41.228 lon=174.8727 l=293 n=263
+#sac z=0 file=HSSS lat=-41.15365 lon=174.98131
+#sac z=0 file=602C lat=-41.192 lon=174.9278
+#sac z=0 file=LHBS lat=-41.19836 lon=174.89215
+#sac z=0 file=468A lat=-41.2028 lon=174.9545
+#sac z=0 file=SOCS lat=-41.20604 lon=174.91577
+#sac z=0 file=651A lat=-41.2064 lon=174.9231
+#sac z=0 file=LHRS lat=-41.20645 lon=174.89302
+#sac z=0 file=465B lat=-41.2075 lon=174.9542 l=339 n=399
+#sac z=0 file=605B lat=-41.2092 lon=174.9405 l=335 n=377
+#sac z=0 file=LHES lat=-41.2134 lon=174.90317 l=325 n=314
+#sac z=0 file=644D lat=-41.2192 lon=174.8817 l=312 n=278
+#sac z=0 file=603B lat=-41.2247 lon=174.86 l=300 n=242
+#sac z=0 file=PGMS lat=-41.22622 lon=174.87927 l=297 n=274
+#sac z=0 file=604A lat=-41.2322 lon=174.9088 l=284 n=324
+#sac z=0 file=464A lat=-41.2325 lon=174.9133 l=283 n=331
+#sac z=0 file=LHUS lat=-41.23256 lon=174.89347 l=283 n=298
+#sac z=0 file=INSS lat=-41.23523 lon=174.92095 l=277 n=344
+#sac z=0 file=640A lat=-41.2367 lon=174.9145 l=274 n=333
+#sac z=0 file=642G lat=-41.2367 lon=174.917 l=274 n=337
+#sac z=0 file=ARKS lat=-41.24379 lon=174.94393 l=258 n=382
+#sac z=0 file=467A lat=-41.2442 lon=174.9022 l=257 n=313
+#sac z=0 file=WDAS lat=-41.25911 lon=174.9483 l=224 n=390
+#sac z=0 file=POTS lat=-41.27393 lon=174.77448 l=191 n=99
+#sac z=0 file=WEMS lat=-41.27635 lon=174.77936 l=185 n=108
+#sac z=0 file=TFSS lat=-41.27714 lon=174.78289 l=184 n=113
+#sac z=0 file=921A lat=-41.2792 lon=174.7733 l=179 n=97
+#sac z=0 file=902B lat=-41.2805 lon=174.7792 l=176 n=107
+#sac z=0 file=906A lat=-41.2808 lon=174.7745 l=176 n=99
+#sac z=0 file=908C lat=-41.2833 lon=174.7742 l=170 n=99
+#sac z=0 file=WNKS lat=-41.28653 lon=174.74189 l=163 n=45
+#sac z=0 file=FKPS lat=-41.28966 lon=174.7786 l=156 n=106
+#sac z=0 file=EBPS lat=-41.29114 lon=174.90007 l=153 n=309
+#sac z=0 file=954A lat=-41.2925 lon=174.7687 l=149 n=90
+#sac z=0 file=TEPS lat=-41.29396 lon=174.78112 l=146 n=110
+#sac z=0 file=RQGS lat=-41.29824 lon=174.78099 l=137 n=110
+#sac z=0 file=WNHS lat=-41.30249 lon=174.77535 l=127 n=101
+#sac z=0 file=MISS lat=-41.3166 lon=174.81827 l=96 n=173
+#sac z=0 file=WNAS lat=-41.32812 lon=174.80887 l=70 n=157
+#sac z=0 file=PIPS lat=-41.2675 lon=174.7861
+
+#rec lat=-41.1793 lon=174.9671 depth=0 file=L01 usgsformat=1 sacformat=1
+#rec lat=-41.193 lon=174.9423 depth=0 file=L02 usgsformat=1 sacformat=1
+#rec lat=-41.1925 lon=174.9252 depth=0 file=L03 usgsformat=1 sacformat=1
+#rec lat=-41.204 lon=174.9162 depth=0 file=L04 usgsformat=1 sacformat=1
+rec lat=-41.2123 lon=174.9042 depth=0 file=L05 usgsformat=1 sacformat=1
+rec lat=-41.2173 lon=174.8953 depth=0 file=L06 usgsformat=1 sacformat=1
+rec lat=-41.212 lon=174.8643 depth=0 file=L07 usgsformat=1 sacformat=1
+rec lat=-41.219 lon=174.8673 depth=0 file=L08 usgsformat=1 sacformat=1
+rec lat=-41.2277 lon=174.871 depth=0 file=L09 usgsformat=1 sacformat=1
+rec lat=-41.226 lon=174.8788 depth=0 file=L10 usgsformat=1 sacformat=1
+rec lat=-41.2303 lon=174.8918 depth=0 file=L11 usgsformat=1 sacformat=1
+rec lat=-41.2322 lon=174.9087 depth=0 file=L12 usgsformat=1 sacformat=1
+rec lat=-41.236 lon=174.9175 depth=0 file=L13 usgsformat=1 sacformat=1
+rec lat=-41.235 lon=174.9205 depth=0 file=L14 usgsformat=1 sacformat=1
+rec lat=-41.2458 lon=174.9075 depth=0 file=L15 usgsformat=1 sacformat=1
+rec lat=-41.2482 lon=174.9368 depth=0 file=L16 usgsformat=1 sacformat=1
+rec lat=-41.2563 lon=174.948 depth=0 file=L17 usgsformat=1 sacformat=1
+#rec lat=-41.203 lon=174.9537 depth=0 file=L18 usgsformat=1 sacformat=1
+rec lat=-41.2095 lon=174.9402 depth=0 file=L19 usgsformat=1 sacformat=1
+#rec lat=-41.2055 lon=174.9303 depth=0 file=L20 usgsformat=1 sacformat=1
+rec lat=-41.2098 lon=174.9243 depth=0 file=L21 usgsformat=1 sacformat=1
+rec lat=-41.2203 lon=174.9217 depth=0 file=L22 usgsformat=1 sacformat=1
+rec lat=-41.2207 lon=174.9097 depth=0 file=L23 usgsformat=1 sacformat=1
+rec lat=-41.228 lon=174.8727 depth=0 file=L24 usgsformat=1 sacformat=1
+#rec lat=-41.15365 lon=174.98131 depth=0 file=HSSS usgsformat=1 sacformat=1
+#rec lat=-41.192 lon=174.9278 depth=0 file=602C usgsformat=1 sacformat=1
+#rec lat=-41.19836 lon=174.89215 depth=0 file=LHBS usgsformat=1 sacformat=1
+#rec lat=-41.2028 lon=174.9545 depth=0 file=468A usgsformat=1 sacformat=1
+#rec lat=-41.20604 lon=174.91577 depth=0 file=SOCS usgsformat=1 sacformat=1
+#rec lat=-41.2064 lon=174.9231 depth=0 file=651A usgsformat=1 sacformat=1
+rec lat=-41.20645 lon=174.89302 depth=0 file=LHRS usgsformat=1 sacformat=1
+rec lat=-41.2075 lon=174.9542 depth=0 file=465B usgsformat=1 sacformat=1
+rec lat=-41.2092 lon=174.9405 depth=0 file=605B usgsformat=1 sacformat=1
+rec lat=-41.2134 lon=174.90317 depth=0 file=LHES usgsformat=1 sacformat=1
+rec lat=-41.2192 lon=174.8817 depth=0 file=644D usgsformat=1 sacformat=1
+rec lat=-41.2247 lon=174.86 depth=0 file=603B usgsformat=1 sacformat=1
+rec lat=-41.22622 lon=174.87927 depth=0 file=PGMS usgsformat=1 sacformat=1
+rec lat=-41.2322 lon=174.9088 depth=0 file=604A usgsformat=1 sacformat=1
+rec lat=-41.2325 lon=174.9133 depth=0 file=464A usgsformat=1 sacformat=1
+rec lat=-41.23256 lon=174.89347 depth=0 file=LHUS usgsformat=1 sacformat=1
+rec lat=-41.23523 lon=174.92095 depth=0 file=INSS usgsformat=1 sacformat=1
+rec lat=-41.2367 lon=174.9145 depth=0 file=640A usgsformat=1 sacformat=1
+rec lat=-41.2367 lon=174.917 depth=0 file=642G usgsformat=1 sacformat=1
+rec lat=-41.24379 lon=174.94393 depth=0 file=ARKS usgsformat=1 sacformat=1
+rec lat=-41.2442 lon=174.9022 depth=0 file=467A usgsformat=1 sacformat=1
+rec lat=-41.25911 lon=174.9483 depth=0 file=WDAS usgsformat=1 sacformat=1
+rec lat=-41.27393 lon=174.77448 depth=0 file=POTS usgsformat=1 sacformat=1
+rec lat=-41.27635 lon=174.77936 depth=0 file=WEMS usgsformat=1 sacformat=1
+rec lat=-41.27714 lon=174.78289 depth=0 file=TFSS usgsformat=1 sacformat=1
+rec lat=-41.2792 lon=174.7733 depth=0 file=921A usgsformat=1 sacformat=1
+rec lat=-41.2805 lon=174.7792 depth=0 file=902B usgsformat=1 sacformat=1
+rec lat=-41.2808 lon=174.7745 depth=0 file=906A usgsformat=1 sacformat=1
+rec lat=-41.2833 lon=174.7742 depth=0 file=908C usgsformat=1 sacformat=1
+rec lat=-41.28653 lon=174.74189 depth=0 file=WNKS usgsformat=1 sacformat=1
+rec lat=-41.28966 lon=174.7786 depth=0 file=FKPS usgsformat=1 sacformat=1
+rec lat=-41.29114 lon=174.90007 depth=0 file=EBPS usgsformat=1 sacformat=1
+rec lat=-41.2925 lon=174.7687 depth=0 file=954A usgsformat=1 sacformat=1
+rec lat=-41.29396 lon=174.78112 depth=0 file=TEPS usgsformat=1 sacformat=1
+rec lat=-41.29824 lon=174.78099 depth=0 file=RQGS usgsformat=1 sacformat=1
+rec lat=-41.30249 lon=174.77535 depth=0 file=WNHS usgsformat=1 sacformat=1
+rec lat=-41.3166 lon=174.81827 depth=0 file=MISS usgsformat=1 sacformat=1
+rec lat=-41.32812 lon=174.80887 depth=0 file=WNAS usgsformat=1 sacformat=1
+rec lat=-41.2675 lon=174.7861 depth=0 file=PIPS usgsformat=1 sacformat=1
+rec lat=-41.2792 lon=174.7763 depth=0 file=BOWS usgsformat=1 sacformat=1
+rec lat=-41.2799 lon=174.7784 depth=0 file=VUWS usgsformat=1 sacformat=1
+rec lat=-41.252143 lon=174.797903 depth=0 file=KHAN usgsformat=1 sacformat=1
+
+# End of MA-CME Input File

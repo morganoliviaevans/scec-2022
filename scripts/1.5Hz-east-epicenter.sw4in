@@ -1,0 +1,222 @@
+# Input File for SW Epicenter Location - Wellington, New Zealand, 0.75 Hz Run
+# Assembled by Morgan Newton 11/24/2022
+# Run Name /Users/mnewton/rockfish-run8
+
+# Run Platform Paths:
+# platform arch=intel shpath=/bin/bash javacpath=$JAVAC javapath=$JAVA_HOME/bin/java ccpath=$CC e3dpath=/usr/local/bin/e3d
+
+# Grid Information:
+# SW Corner lat0=-41.359721 lon0=174.714919
+# NW Corner lat0=-41.206476 lon0=174.714919
+# e3dgrid l=341 m=601 n=421 dh=0.05 b=4 active=0 q=1 az=90.0 lat0=-41.359721 lon0=174.714919
+# grid nx=421 ny=341 nz=601 h=50.0 lat=-41.206829 lon=174.714919 az=90.0
+# pgrid nx=516 ny=318 nz=601 h=50.0 delta=5.0E-4 lat=-41.360 lon=174.714 az=90.0
+grid y=17000 z=15000 x=21450 h=20 az=90.0 lat=-41.206829 lon=174.714919
+
+# Source Information *East*:
+source type=C6SmoothBump strike=44 dip=80 rake=-180 freq=0.75 t0=0 m0=1.153e14 lat=-41.27601 lon=174.90198 depth=10000
+
+# Rules line for Louie Alterations to Benites & Olsen (2005):
+rules file=WnLH-Rules.java Qf=1 minthick=0.01 minVs=0.175 minVp=1.45 maxv=5.4 vpovs=1.732051 zgeotech=0.03 rockgeotech=0.525 soilgeotech=0.225
+vfile type=p file=vp.flt
+vfile type=s file=vs.flt
+vfile type=r file=den.flt
+vfile Qf=1.0 file=Qp.Qp
+vfile Qf=1.0 file=Qs.Qs
+
+# Basin Data Inputs:
+# Basin depth from depth to Vs=1500 m/s in Benites & Olsen (2005 BSSA)
+basin type=proximity file=wellington-region-basins.asc interp=near radius=0.2 search=30.0
+#basin type=depth format=ascii radius=0.1 search=0.2 interp=dist file=wnlh-benites-dep.asc
+basin type=depth format=ascii radius=0.2 search=0.5 interp=near file=D2B_PREF.txt
+basin type=depth format=ascii radius=0.25 search=1 interp=quad file=Parkway-remi-depth.asc
+basin type=depth format=ascii radius=0.3 search=0.6 interp=dist file=Stronach-GNS-adjust.asc
+basin type=depth format=ascii radius=0.02 search=0.05 interp=near file=Wellington-Stronach-depth.asc
+
+# Geotechnical Data Inputs:
+# Vs30 computed from multilayer model of Benites & Olsen (2005 BSSA)
+#geotech	depth=30 file=wnlh-benites-v30.asc format=ascii radius=0.2
+# Vs30 taken from 2006 measurements of Kaiser and Louie
+geotech	depth=30 file=wnlh-remi.asc format=ascii interp=dist radius=0.25
+
+# Attenuation Specification for SW4:
+attenuation phasefreq=0.75
+
+# MA 6.0.0 Writes New ASCII Profile Grid File For SW4:
+block vp=5500 vs=3175 rho=2670 qp=2000 qs=2000
+pfile filename=Wellington-Central-pfile.asc smoothingsize=3
+
+# Global Minima for Velocities:
+globalmaterial vpmin=1450 vsmin=175
+
+# Run Time-Step Definition:
+#time dt=0.016 t=6251
+time t=40 utcstart=12/23/2015:6:22:36.0
+
+# Run Output Definitions:
+amplif  file=Wellington-Central-amplifmap.flt format=binary
+amplif  file=Wellington-Central-v30map.flt type=vels format=binary
+amplif  file=Wellington-Central-depthmap.flt type=depth format=binary
+#image mode=4 file=PGV-max.intel ieee=1 movie=2 z=0
+#image mode=2 file=snap-snap.intel ieee=1 movie=30 z=0
+
+# After 0.5 sec of Model Time, Save VS Model Build:
+image mode=s file=vsmap z=0 time=0.5
+image mode=s file=vssect y=8068 time=0.5
+
+# At End of Calculation, Export Maximum Horizontal Shaking Velocity (since source time function is two-sided):
+image mode=hmax file=pgvmap10s z=0 time=10
+image mode=hmax file=pgvmap z=0 time=40
+
+# Extract Time Slices, Maps and Sections:
+image mode=ux file=snap-ux z=0 timeInterval=0.1
+image mode=uy file=snap-uy z=0 timeInterval=0.1
+image mode=uz file=snap-uz z=0 timeInterval=0.1
+image mode=ux file=sectionsnap-ux y=8068 timeInterval=0.1
+image mode=uy file=sectionsnap-uy y=8068 timeInterval=0.1
+image mode=uz file=sectionsnap-uz y=8068 timeInterval=0.1
+
+# Stations for Synthetic Seismogram Output as USGS & SAC Files:
+
+#rec lat=-41.1793 lon=174.9671 depth=0 file=L01 usgsformat=1 sacformat=1
+#rec lat=-41.193 lon=174.9423 depth=0 file=L02 usgsformat=1 sacformat=1
+#rec lat=-41.1925 lon=174.9252 depth=0 file=L03 usgsformat=1 sacformat=1
+#rec lat=-41.204 lon=174.9162 depth=0 file=L04 usgsformat=1 sacformat=1
+rec lat=-41.2123 lon=174.9042 depth=0 file=L05 usgsformat=1 sacformat=1
+rec lat=-41.2173 lon=174.8953 depth=0 file=L06 usgsformat=1 sacformat=1
+rec lat=-41.212 lon=174.8643 depth=0 file=L07 usgsformat=1 sacformat=1
+rec lat=-41.219 lon=174.8673 depth=0 file=L08 usgsformat=1 sacformat=1
+rec lat=-41.2277 lon=174.871 depth=0 file=L09 usgsformat=1 sacformat=1
+rec lat=-41.226 lon=174.8788 depth=0 file=L10 usgsformat=1 sacformat=1
+rec lat=-41.2303 lon=174.8918 depth=0 file=L11 usgsformat=1 sacformat=1
+rec lat=-41.2322 lon=174.9087 depth=0 file=L12 usgsformat=1 sacformat=1
+rec lat=-41.236 lon=174.9175 depth=0 file=L13 usgsformat=1 sacformat=1
+rec lat=-41.235 lon=174.9205 depth=0 file=L14 usgsformat=1 sacformat=1
+rec lat=-41.2458 lon=174.9075 depth=0 file=L15 usgsformat=1 sacformat=1
+rec lat=-41.2482 lon=174.9368 depth=0 file=L16 usgsformat=1 sacformat=1
+rec lat=-41.2563 lon=174.948 depth=0 file=L17 usgsformat=1 sacformat=1
+#rec lat=-41.203 lon=174.9537 depth=0 file=L18 usgsformat=1 sacformat=1
+rec lat=-41.2095 lon=174.9402 depth=0 file=L19 usgsformat=1 sacformat=1
+#rec lat=-41.2055 lon=174.9303 depth=0 file=L20 usgsformat=1 sacformat=1
+rec lat=-41.2098 lon=174.9243 depth=0 file=L21 usgsformat=1 sacformat=1
+rec lat=-41.2203 lon=174.9217 depth=0 file=L22 usgsformat=1 sacformat=1
+rec lat=-41.2207 lon=174.9097 depth=0 file=L23 usgsformat=1 sacformat=1
+rec lat=-41.228 lon=174.8727 depth=0 file=L24 usgsformat=1 sacformat=1
+#rec lat=-41.15365 lon=174.98131 depth=0 file=HSSS usgsformat=1 sacformat=1
+#rec lat=-41.192 lon=174.9278 depth=0 file=602C usgsformat=1 sacformat=1
+#rec lat=-41.19836 lon=174.89215 depth=0 file=LHBS usgsformat=1 sacformat=1
+#rec lat=-41.2028 lon=174.9545 depth=0 file=468A usgsformat=1 sacformat=1
+#rec lat=-41.20604 lon=174.91577 depth=0 file=SOCS usgsformat=1 sacformat=1
+#rec lat=-41.2064 lon=174.9231 depth=0 file=651A usgsformat=1 sacformat=1
+rec lat=-41.20645 lon=174.89302 depth=0 file=LHRS usgsformat=1 sacformat=1
+rec lat=-41.2075 lon=174.9542 depth=0 file=465B usgsformat=1 sacformat=1
+rec lat=-41.2092 lon=174.9405 depth=0 file=605B usgsformat=1 sacformat=1
+rec lat=-41.2134 lon=174.90317 depth=0 file=LHES usgsformat=1 sacformat=1
+rec lat=-41.2192 lon=174.8817 depth=0 file=644D usgsformat=1 sacformat=1
+rec lat=-41.2247 lon=174.86 depth=0 file=603B usgsformat=1 sacformat=1
+rec lat=-41.22622 lon=174.87927 depth=0 file=PGMS usgsformat=1 sacformat=1
+rec lat=-41.2322 lon=174.9088 depth=0 file=604A usgsformat=1 sacformat=1
+rec lat=-41.2325 lon=174.9133 depth=0 file=464A usgsformat=1 sacformat=1
+rec lat=-41.23256 lon=174.89347 depth=0 file=LHUS usgsformat=1 sacformat=1
+rec lat=-41.23523 lon=174.92095 depth=0 file=INSS usgsformat=1 sacformat=1
+rec lat=-41.2367 lon=174.9145 depth=0 file=640A usgsformat=1 sacformat=1
+rec lat=-41.2367 lon=174.917 depth=0 file=642G usgsformat=1 sacformat=1
+rec lat=-41.24379 lon=174.94393 depth=0 file=ARKS usgsformat=1 sacformat=1
+rec lat=-41.2442 lon=174.9022 depth=0 file=467A usgsformat=1 sacformat=1
+rec lat=-41.25911 lon=174.9483 depth=0 file=WDAS usgsformat=1 sacformat=1
+rec lat=-41.27393 lon=174.77448 depth=0 file=POTS usgsformat=1 sacformat=1
+rec lat=-41.27635 lon=174.77936 depth=0 file=WEMS usgsformat=1 sacformat=1
+rec lat=-41.27714 lon=174.78289 depth=0 file=TFSS usgsformat=1 sacformat=1
+rec lat=-41.2792 lon=174.7733 depth=0 file=921A usgsformat=1 sacformat=1
+rec lat=-41.2805 lon=174.7792 depth=0 file=902B usgsformat=1 sacformat=1
+rec lat=-41.2808 lon=174.7745 depth=0 file=906A usgsformat=1 sacformat=1
+rec lat=-41.2833 lon=174.7742 depth=0 file=908C usgsformat=1 sacformat=1
+rec lat=-41.28653 lon=174.74189 depth=0 file=WNKS usgsformat=1 sacformat=1
+rec lat=-41.28966 lon=174.7786 depth=0 file=FKPS usgsformat=1 sacformat=1
+rec lat=-41.29114 lon=174.90007 depth=0 file=EBPS usgsformat=1 sacformat=1
+rec lat=-41.2925 lon=174.7687 depth=0 file=954A usgsformat=1 sacformat=1
+rec lat=-41.29396 lon=174.78112 depth=0 file=TEPS usgsformat=1 sacformat=1
+rec lat=-41.29824 lon=174.78099 depth=0 file=RQGS usgsformat=1 sacformat=1
+rec lat=-41.30249 lon=174.77535 depth=0 file=WNHS usgsformat=1 sacformat=1
+rec lat=-41.3166 lon=174.81827 depth=0 file=MISS usgsformat=1 sacformat=1
+rec lat=-41.32812 lon=174.80887 depth=0 file=WNAS usgsformat=1 sacformat=1
+rec lat=-41.2675 lon=174.7861 depth=0 file=PIPS usgsformat=1 sacformat=1
+
+# Aasha's Arrays
+# Northeast Basin
+rec lat=-41.196184 lon=174.916126 depth=0 file=LH_2_01 usgsformat=1 sacformat=1
+rec lat=-41.199758 lon=174.919710 depth=0 file=LH_2_02 usgsformat=1 sacformat=1
+rec lat=-41.203417 lon=174.923124 depth=0 file=LH_2_03 usgsformat=1 sacformat=1
+rec lat=-41.207087 lon=174.926617 depth=0 file=LH_2_04 usgsformat=1 sacformat=1
+rec lat=-41.210740 lon=174.930080 depth=0 file=LH_2_05 usgsformat=1 sacformat=1
+rec lat=-41.214402 lon=174.933561 depth=0 file=LH_2_06 usgsformat=1 sacformat=1
+rec lat=-41.215824 lon=174.934890 depth=0 file=LH_2_07 usgsformat=1 sacformat=1
+rec lat=-41.217104 lon=174.936105 depth=0 file=LH_2_08 usgsformat=1 sacformat=1
+rec lat=-41.202473 lon=174.904354 depth=0 file=LH_3_01 usgsformat=1 sacformat=1
+rec lat=-41.204169 lon=174.906246 depth=0 file=LH_3_02 usgsformat=1 sacformat=1
+rec lat=-41.204524 lon=174.906631 depth=0 file=LH_3_03 usgsformat=1 sacformat=1
+rec lat=-41.205230 lon=174.907395 depth=0 file=LH_3_04 usgsformat=1 sacformat=1
+rec lat=-41.206744 lon=174.909015 depth=0 file=LH_3_05 usgsformat=1 sacformat=1
+rec lat=-41.210151 lon=174.912762 depth=0 file=LH_3_06 usgsformat=1 sacformat=1
+rec lat=-41.212019 lon=174.914954 depth=0 file=LH_3_07 usgsformat=1 sacformat=1
+rec lat=-41.213456 lon=174.916437 depth=0 file=LH_3_08 usgsformat=1 sacformat=1
+rec lat=-41.214953 lon=174.918131 depth=0 file=LH_3_09 usgsformat=1 sacformat=1
+rec lat=-41.216470 lon=174.919772 depth=0 file=LH_3_10 usgsformat=1 sacformat=1
+rec lat=-41.219254 lon=174.922865 depth=0 file=LH_3_11 usgsformat=1 sacformat=1
+rec lat=-41.220825 lon=174.924494 depth=0 file=LH_3_12 usgsformat=1 sacformat=1
+rec lat=-41.222378 lon=174.926399 depth=0 file=LH_3_13 usgsformat=1 sacformat=1
+rec lat=-41.222378 lon=174.926399 depth=0 file=LH_3_14 usgsformat=1 sacformat=1
+rec lat=-41.222879 lon=174.927028 depth=0 file=LH_3_15 usgsformat=1 sacformat=1
+rec lat=-41.224178 lon=174.928359 depth=0 file=LH_3_16 usgsformat=1 sacformat=1
+rec lat=-41.223585 lon=174.866564 depth=0 file=LH_1_00 usgsformat=1 sacformat=1
+rec lat=-41.224241 lon=174.868845 depth=0 file=LH_1_01 usgsformat=1 sacformat=1
+rec lat=-41.224856 lon=174.870822 depth=0 file=LH_1_02 usgsformat=1 sacformat=1
+rec lat=-41.226176 lon=174.875251 depth=0 file=LH_1_03 usgsformat=1 sacformat=1
+rec lat=-41.227489 lon=174.879671 depth=0 file=LH_1_04 usgsformat=1 sacformat=1
+rec lat=-41.228831 lon=174.884083 depth=0 file=LH_1_05 usgsformat=1 sacformat=1
+rec lat=-41.230130 lon=174.888531 depth=0 file=LH_1_06 usgsformat=1 sacformat=1
+rec lat=-41.231437 lon=174.892964 depth=0 file=LH_1_07 usgsformat=1 sacformat=1
+rec lat=-41.232796 lon=174.897402 depth=0 file=LH_1_08 usgsformat=1 sacformat=1
+rec lat=-41.234114 lon=174.901845 depth=0 file=LH_1_09 usgsformat=1 sacformat=1
+rec lat=-41.235462 lon=174.906298 depth=0 file=LH_1_10 usgsformat=1 sacformat=1
+rec lat=-41.236825 lon=174.910746 depth=0 file=LH_1_11 usgsformat=1 sacformat=1
+rec lat=-41.237682 lon=174.913601 depth=0 file=LH_1_12 usgsformat=1 sacformat=1
+rec lat=-41.238444 lon=174.916204 depth=0 file=LH_1_13 usgsformat=1 sacformat=1
+rec lat=-41.239751 lon=174.920628 depth=0 file=LH_1_14 usgsformat=1 sacformat=1
+
+# Southwest Basin
+rec lat=-41.276062 lon=174.772220 depth=0 file=WLG_2_01 usgsformat=1 sacformat=1
+rec lat=-41.277057 lon=174.773142 depth=0 file=WLG_2_02 usgsformat=1 sacformat=1
+rec lat=-41.277722 lon=174.773817 depth=0 file=WLG_2_03 usgsformat=1 sacformat=1
+rec lat=-41.278960 lon=174.775013 depth=0 file=WLG_2_x usgsformat=1 sacformat=1
+rec lat=-41.279849 lon=174.775783 depth=0 file=WLG_2_04 usgsformat=1 sacformat=1
+rec lat=-41.280730 lon=174.776653 depth=0 file=WLG_2_05 usgsformat=1 sacformat=1
+rec lat=-41.281336 lon=174.777205 depth=0 file=WLG_2_06 usgsformat=1 sacformat=1
+rec lat=-41.282354 lon=174.778204 depth=0 file=WLG_2_07 usgsformat=1 sacformat=1
+rec lat=-41.283181 lon=174.778975 depth=0 file=WLG_2_08 usgsformat=1 sacformat=1
+rec lat=-41.283979 lon=174.779555 depth=0 file=WLG_2_09 usgsformat=1 sacformat=1
+rec lat=-41.290163 lon=174.770087 depth=0 file=WLG_1_00 usgsformat=1 sacformat=1
+rec lat=-41.291390 lon=174.772377 depth=0 file=WLG_1_01 usgsformat=1 sacformat=1
+rec lat=-41.292046 lon=174.773808 depth=0 file=WLG_1_02 usgsformat=1 sacformat=1
+rec lat=-41.292793 lon=174.775395 depth=0 file=WLG_1_03 usgsformat=1 sacformat=1
+rec lat=-41.293696 lon=174.777165 depth=0 file=WLG_1_04 usgsformat=1 sacformat=1
+rec lat=-41.294258 lon=174.778368 depth=0 file=WLG_1_05 usgsformat=1 sacformat=1
+rec lat=-41.295577 lon=174.780850 depth=0 file=WLG_1_06 usgsformat=1 sacformat=1
+rec lat=-41.296721 lon=174.783118 depth=0 file=WLG_1_07 usgsformat=1 sacformat=1
+rec lat=-41.297858 lon=174.785479 depth=0 file=WLG_1_08 usgsformat=1 sacformat=1
+rec lat=-41.298986 lon=174.787640 depth=0 file=WLG_1_09 usgsformat=1 sacformat=1
+rec lat=-41.300042 lon=174.789731 depth=0 file=WLG_1_10 usgsformat=1 sacformat=1
+rec lat=-41.304645 lon=174.772753 depth=0 file=WLG_3_01 usgsformat=1 sacformat=1
+rec lat=-41.302741 lon=174.773765 depth=0 file=WLG_3_02 usgsformat=1 sacformat=1
+rec lat=-41.301426 lon=174.774530 depth=0 file=WLG_3_03 usgsformat=1 sacformat=1
+rec lat=-41.299619 lon=174.775461 depth=0 file=WLG_3_04 usgsformat=1 sacformat=1
+rec lat=-41.298203 lon=174.776213 depth=0 file=WLG_3_05 usgsformat=1 sacformat=1
+rec lat=-41.297237 lon=174.776754 depth=0 file=WLG_3_06 usgsformat=1 sacformat=1
+rec lat=-41.295789 lon=174.777597 depth=0 file=WLG_3_07 usgsformat=1 sacformat=1
+rec lat=-41.294864 lon=174.778073 depth=0 file=WLG_3_08 usgsformat=1 sacformat=1
+rec lat=-41.293950 lon=174.778550 depth=0 file=WLG_3_09 usgsformat=1 sacformat=1
+rec lat=-41.292925 lon=174.779209 depth=0 file=WLG_3_10 usgsformat=1 sacformat=1
+rec lat=-41.292197 lon=174.779742 depth=0 file=WLG_3_11 usgsformat=1 sacformat=1
+rec lat=-41.291376 lon=174.780207 depth=0 file=WLG_3_12 usgsformat=1 sacformat=1
+
+# End of MA-CME Input File
