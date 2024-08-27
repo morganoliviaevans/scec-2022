@@ -25,7 +25,7 @@ The `/scripts/` directory contains a sample of scripts I developed or utilized d
 - [Seismic Analysis Code (SAC)](https://ds.iris.edu/files/sac-manual/)
 
 # Documentation
-The `/docs/` directory contains detailed build instructions, references, and additional documentation related to the research.
+The `/docs/` directory contains detailed build instructions, resources, and additional documentation related to the research.
 
 # Reports and Posters
 The `/reports-posters/` directory contains my 2022 Southern California Earthquake Center (SCEC) Annual Meeting poster, 2023 Earthquake Engineering Research Institute (EERI) poster, a comprehensive updated guide for SW4 software installation, and "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster" technical paper.
