@@ -15,7 +15,7 @@ This repository includes the simulations, poster, paper, scripts, and documentat
 - [Simulations](#simulations)
 
 # Scripts
-The `/scripts/` directory contains a sample of scripts I developed or utilized during my internship. Each script is documented with comments to explain its purpose and usage. All scripts used for were jointly built with my advisor, [John Louie, PhD, Chief Geophysicist | Terēan™](https://www.louie.pub/). Many different scripts were created which varied significantly per architecture and system specification.
+The `/scripts/` directory contains a sample of scripts I developed or utilized during my internship. Each script is documented with comments to explain its purpose and usage. All scripts used for were jointly built with my advisor, [John Louie, PhD, Chief Geophysicist | Terēan™](https://www.louie.pub/). Many scripts were created for this research which varied per architecture, model and system specification.
 
 # Software Used
 - [Adapter](https://macroplant.com/adapter)
@@ -25,12 +25,12 @@ The `/scripts/` directory contains a sample of scripts I developed or utilized d
 - [Seismic Analysis Code (SAC)](https://ds.iris.edu/files/sac-manual/)
 
 # Documentation
-The `/docs/` directory contains detailed build instructions, resources, and additional documentation related to the research.
+The `/docs/` directory contains resources and additional documentation related to the research.
 
 # Reports and Posters
 The `/reports-posters/` directory contains my 2022 Southern California Earthquake Center (SCEC) Annual Meeting poster, 2023 Earthquake Engineering Research Institute (EERI) poster, a comprehensive updated guide for SW4 software installation, and "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster" technical paper.
 
 # Simulations
-The `/simulations/` directory contains data and results for 0.3Hz and 0.75Hz simluations.
+The `/simulations/` directory contains example data and results for 0.6Hz (low-resolution) and 1.5Hz (high-resolution) simluations. Many simulations were created and analyzed for this research with varying epicenter locations, minimum velocity, frequency, earthquake magnitude and basin depth models. 
 
 This repository serves as a comprehensive record of my research experience with SCEC, providing insights into the seismic modeling tasks I completed and the knowledge gained. I hope it can be a valuable resource for anyone interested in similar work or future interns. Feel free to explore the repository, and don't hesitate to reach out if you have any questions! [morganoliviaevans@gmail.com](mailto:morganoliviaevans@gmail.com)
