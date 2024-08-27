@@ -1,10 +1,7 @@
 # Southern California Earthquake Center Internship 2022-2023
 
 # Overview
-This repository documents my research and accomplishments during my internship with the Southern California Earthquake Center (SCEC) in the Summer and Fall of 2022. The research was conducted in two phases:
-
-- **Summer 2022:** Focused on low-resolution seismic simulations using SW4 software on a MacBook Pro.
-- **Fall 2022 - Winter 2023:** Focused on high-resolution seismic simulations using the ARCH Rockfish supercomputing cluster. This phase included a detailed analysis and scaling study, culminating in a technical paper.
+This repository showcases my research conducted during my internship with the Southern California Earthquake Center (SCEC) in 2022 and 2023. The research focused on seismic simulations in the Wellington, New Zealand region. I explored SW4 software performance on varying computing platforms and compared an older GNS basin thickness model to a newer basin thickness model developed by Stronach and Stern. The work spans low-resolution and high-resolution simulations, culminating in seismic models, detailed scaling analysis and technical paper.
 
 This repository includes the simulations, poster, paper, scripts, and documentation related to the research.
 
