@@ -28,7 +28,7 @@ The and `/scripts/` directory includes all scripts used during the research phas
 - **SW4:** [SW4 Software](https://geodynamics.org/cig/software/sw4/)
 
 # Reports and Posters
-The `/reports-posters/` directory contains my 2022 Southern California Earthquake Center (SCEC) Annual Meeting poster 2023 Earthquake Engineering Research Institute (EERI) poster and "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster" technical paper.
+The `/reports-posters/` directory contains my 2022 Southern California Earthquake Center (SCEC) Annual Meeting poster, 2023 Earthquake Engineering Research Institute (EERI) poster and "Exploring the SW4 Synthetic Seismic Performance of the ARCH Rockfish Cluster" technical paper.
 
 # Documentation
 The `/docs/` directory contains detailed build instructions, references, and additional documentation related to the research.
